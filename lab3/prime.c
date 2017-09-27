@@ -4,15 +4,15 @@ int main(int argc, char *argv[])
 {
     int num ;
     int counter = 2;
-    int is_prime = 0 ;
+    int is_prime = 1 ;
     printf("Please enter a number : ");
     scanf ("%d", &num);
 
     while (counter < num)
     {
-        if (num % counter != 0)
+        if (num % counter == 0 )
         {
-            is_prime = 1 ;
+            is_prime = 0; 
         }
         counter ++ ; 
     }
@@ -25,19 +25,27 @@ int main(int argc, char *argv[])
 
     counter = 2 ;
     printf("%d = ", num);
-    while (counter < num)
+    while (counter <= num)
     {
         while ( num % counter == 0 )
         {
+            printf("%d", counter); 
             num = num / counter ; 
-            printf("%d", counter);
-            if (num % counter == 0)
+            if ( num == 1)
             {
-                printf("*");
+                printf("\n");
+                return 0;
             }
-            else
+            else 
             {
-                printf(" ");
+                if (num % counter == 0)
+                {
+                    printf("*");
+                }
+                else
+                {
+                    printf(" * ");
+                }
             }
         }
         counter ++ ; 
