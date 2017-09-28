@@ -3,7 +3,7 @@
 #define TRUE     1
 #define FALSE    0
 
-#define SIZE     4
+#define SIZE     3
 
 #define NONE    -1
 #define NOUGHTS  0
@@ -13,11 +13,15 @@
 void  scanBoard( int board[SIZE][SIZE] );
 void printBoard( int board[SIZE][SIZE] );
 int   getWinner( int board[SIZE][SIZE] );
+int check_row ( int board[SIZE][SIZE] ) ;
+int check_column( int board[SIZE][SIZE] );
+int check_left_diag( int board[SIZE][SIZE] );
+int check_right_diag( int board[SIZE][SIZE] );
 
 int main( void )
 {
   int board[SIZE][SIZE];
-//  int winner;
+  int winner;
 
   printf("Please enter the board:\n");
   scanBoard( board );
@@ -25,6 +29,19 @@ int main( void )
   printf("Here is the board:\n");
   printBoard( board );
 
+  winner = getWinner( board ) ;
+  if ( winner == CROSSES )
+  {
+      printf("Crosses Win\n");
+  }
+  else if ( winner == NOUGHTS )
+  {
+      printf("Noughts Win\n");
+  }
+  else
+  {
+      printf("No Winner\n");
+  }
   return 0;
 }
 
@@ -75,9 +92,33 @@ void printBoard(int board[SIZE][SIZE])
 
 int getWinner( int board[SIZE][SIZE] )
 {
+    int winner = check_row( board ) ;
+    if ( winner != NONE )
+    {
+        return winner;
+    }
+    winner = check_column( board ) ;
+    if ( winner != NONE )
+    {
+        return winner;
+    }
+    winner = check_left_diag( board ) ;
+    if ( winner != NONE )
+    {
+        return winner;
+    }
+    winner = check_right_diag( board ) ;
+    if ( winner != NONE )
+    {
+        return winner;
+    }
+    return NONE;
+} 
+
+int check_row( int board[SIZE][SIZE] )
+{
     int x = 0 ; 
     int o = 0 ;
-
     for ( int i =0 ; i < SIZE ; i ++ )
     {
         for ( int j =0 ; j < SIZE ; j ++ )
@@ -91,17 +132,112 @@ int getWinner( int board[SIZE][SIZE] )
                 i ++ ;
             }
         }
-        if ( x == 4 )
+        if ( x == SIZE )
         {
-            printf("Crosses Win\n");
-            return 0 ;
+            return CROSSES ;
         }
-        else if ( o == 4 )
+        else if ( o == SIZE )
         {
-            printf("Noughts Win\n");
-            return 0 ;
+            return NOUGHTS ;
         }
         x = 0 ; 
         o = 0 ;
     }
-} 
+    return NONE;
+}
+
+int check_column( int board[SIZE][SIZE] )
+{
+    int x = 0 ;
+    int o = 0 ;
+    for ( int i =0 ; i < SIZE ; i ++ )
+    {
+        for ( int j =0 ; j < SIZE ; j ++ )
+        {
+           if ( board[j][i] == '0' )
+            {
+                 o ++ ;  
+            }
+            else if ( board[j][i] == '1' )
+            {
+                x ++ ;
+            }
+        }
+        if ( x == SIZE )
+        {
+            return CROSSES ;
+        }
+        else if ( o == SIZE )
+        {
+            return NOUGHTS ;
+        }
+        x = 0 ; 
+        o = 0 ;
+    }
+    return NONE ;
+}
+
+int check_left_diag ( int board[SIZE][SIZE] )
+{
+    int x = 0 ; 
+    int o = 0 ;
+    for ( int i =0 ; i < SIZE ; i ++ )
+    {
+        for ( int j =0 ; j < SIZE ; j ++ )
+        {
+            if ( i == j )
+            {
+                if ( board[i][j] == '0') 
+                {
+                    o ++ ; 
+                }
+                else if ( board[i][j] == '1' )
+                {
+                    i ++ ;
+                }
+            }
+        }
+    }
+    if ( x == SIZE )
+    {
+        return CROSSES ;
+    }
+    else if ( o == SIZE )
+    {
+        return NOUGHTS ;
+    }
+    return NONE;
+}
+
+int check_right_diag( int board[SIZE][SIZE] )
+{
+    int x = 0 ; 
+    int o = 0 ;
+    for ( int i =0 ; i < SIZE ; i ++ )
+    {
+        for ( int j =0 ; j < SIZE ; j ++ )
+        {
+            if ( j == (SIZE - 1 - i) )
+            {
+                if ( board[i][j] == '0') 
+                {
+                    o ++ ; 
+                }
+                else if ( board[i][j] == '1' )
+                {
+                    i ++ ;
+                }
+            }
+        }
+    }
+    if ( x == SIZE )
+    {
+        return CROSSES ;
+    }
+    else if ( o == SIZE )
+    {
+        return NOUGHTS ;
+    }
+    return NONE;
+}
+
