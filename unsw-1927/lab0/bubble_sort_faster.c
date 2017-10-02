@@ -13,15 +13,15 @@ int main(void)
     {
         array_len ++ ;
     }
-    printf("\nThis is the pre-sorted array\n");
+/*    printf("\nThis is the pre-sorted array\n");
     for ( int i = 0 ; i < array_len ; i ++ )
     {
         printf("%d\n", array[i]);
-    }
+    } */
 
-    sort(array, array_len) ;
+    sort(array, array_len) ; 
 
-    printf("\nThis is the sorted array\n");
+   // printf("\nThis is the sorted array\n"); 
     for ( int i = 0 ; i < array_len ; i ++ )
     {
         printf("%d\n", array[i]);
