@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define MAXLENGTH 209800001  // how big I want my array to be
+#define MAXLENGTH 2098001  // how big I want my array to be
 #define PIVOT ((MAXLENGTH+1)/2) // midpoint ; so that we can store both negative and postive values
 
 /* PIVOT is where our numeric 0 is stored, i.e. exactly in the middle of the array.
@@ -15,6 +15,11 @@ Example : if maxlength = 3, then pivot = ((3+1) / 2) = 2. So 1st element can be 
 int main ( void )
 {
     int *array = malloc(sizeof(int)*MAXLENGTH) ;
+    if ( array == NULL )
+    {
+        printf(" Not enough memory :(\n") ;
+        return EXIT_FAILURE ;
+    }
     int temp ;
     while ( (scanf("%d", &temp) ) != EOF )
     {
