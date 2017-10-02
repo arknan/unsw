@@ -6,9 +6,10 @@
 #define MAXLENGTH 209800001  // how big I want my array to be
 #define PIVOT ((MAXLENGTH+1)/2) // midpoint ; so that we can store both negative and postive values
 
-/* PIVOT is where our numeric 0 is stored, i.e. exactly in the middle of the array so that 1st half can be negative numbers and the second half of the array can be positive numbers.
-We want the maxlength to be an odd number because it gives us a nice even distribution of,
-negatve and positive numbers ; if maxlength = 3 ; then pivot = ((3+1) / 2) = 2. So 1st element can be -1 ; second can be 0 and third can be 1 . */
+/* PIVOT is where our numeric 0 is stored, i.e. exactly in the middle of the array.
+We want this behaviour, so that 1st half of the array can be negative numbers and the second half can be positive numbers.
+We want the maxlength to be an odd number because it gives us a nice even distribution of negatve and positive numbers.
+Example : if maxlength = 3, then pivot = ((3+1) / 2) = 2. So 1st element can be -1 ; second can be 0 and third can be 1 . */
 
 
 int main ( void )
@@ -17,7 +18,7 @@ int main ( void )
     int temp ;
     while ( (scanf("%d", &temp) ) != EOF )
     {
-        array[temp + (PIVOT -1)] ++ ;
+        array[temp + (PIVOT -1)] ++ ;           // Since our array starts with an index 0 and not 1 
     }
     for ( int i = 0 ; i < MAXLENGTH ; i ++ )
     {
